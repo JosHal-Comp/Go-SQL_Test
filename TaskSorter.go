@@ -270,16 +270,6 @@ func create_task(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	insert_task.Task = params["task"]
 
-	if err != nil {
-		http.Error(w, "Invalid task ID", http.StatusBadRequest)
-		return
-	}
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
 	count := 0
 
 	err = db.QueryRow("SELECT COUNT(*) FROM Tasks WHERE task = $1", insert_task.Task).Scan(&count)
